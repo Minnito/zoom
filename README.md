@@ -10,6 +10,7 @@
 | **Status** | 2026-10-25 |
 | **Build** | `build/libs/zoom.jar`, 19,696 bytes, SHA-256 `3c35d414e2d655ca407e1f0e3b198d4176bece953f45e0610ceb8e3efcff6b8c` |
 | **Self-test** | `gradlew runTest`: 12 of 12 checks passed (2026-10-25, 21:21) |
+| **Download** | [Release v1.0.0](https://github.com/Minnito/zoom/releases/tag/v1.0.0) |
 | **Patch check** | not run yet: `gradlew check` needs the addon server (`localhost:8787`). All 6 patches were applied in the game without errors |
 
 ---
