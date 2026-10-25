@@ -17,9 +17,7 @@
 
 ## 1. Goal
 
-A zoom in the style of the Fabric mod [Just Zoom](https://www.curseforge.com/minecraft/mc-mods/just-zoom) that runs directly in the launcher's client, without Fabric or Forge.
-
-**Own code, no copy.** Just Zoom is licensed under DSMSL v3.1, which forbids including any part of its code in another project. Only the mod's *features* were analyzed (mixin targets, settings, defaults) and then rebuilt from scratch on top of the client API. No class, method body or asset of Just Zoom is part of this addon.
+A zoom in the style of Optifine or any other Zoom Mod
 
 ## 2. Features
 
