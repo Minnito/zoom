@@ -1,0 +1,48 @@
+{
+  "name": "Zoom",
+  "developer": "Minnito",
+  "version": "1.0.0",
+  "minecraft": "26.3",
+  "api": "6.2.1",
+  "main": "zoom.Zoom",
+  "category": "visual",
+  "permissions": ["input", "server"],
+  "description": "Zoom per Taste wie JustZoom: Mausrad ändert die Stufe, sanfte Übergänge, Maus passt sich an, Hand und HUD optional aus, Third-Person-Zoom aus der Ich-Sicht, Fernrohr nutzt denselben Zoom. Server können den Zoom per Taste abschalten.",
+  "hooks": "zoom/Hooks",
+  "patches": [
+    {
+      "cls": "net/minecraft/client/renderer/FirstPersonHandsAndItemsRenderer",
+      "method": "submitHandsWithItems",
+      "hook": "hand",
+      "replace": true
+    },
+    {
+      "cls": "net/minecraft/client/gui/Hud",
+      "method": "extractRenderState",
+      "desc": "(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V",
+      "hook": "hud",
+      "replace": true
+    },
+    {
+      "cls": "net/minecraft/client/gui/Hud",
+      "method": "extractCameraOverlays",
+      "hook": "overlays"
+    },
+    {
+      "cls": "net/minecraft/client/gui/Hud",
+      "method": "extractSpyglassOverlay",
+      "hook": "fernrohrOverlay",
+      "replace": true
+    },
+    {
+      "cls": "net/minecraft/client/CameraType",
+      "method": "isFirstPerson",
+      "hook": "erstePerson"
+    },
+    {
+      "cls": "net/minecraft/client/player/AbstractClientPlayer",
+      "method": "getFieldOfViewModifier",
+      "hook": "fovModifier"
+    }
+  ]
+}
