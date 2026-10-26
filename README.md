@@ -10,7 +10,7 @@
 | **Status** | 2026-10-26 |
 | **Build** | `build/libs/zoom.jar`, 19,696 bytes, SHA-256 `f80bb20f9a262e12b28216395f906b4dddb70768dd64750eec51cd130e4c54b6` |
 | **Self-test** | `gradlew runTest`: 12 of 12 checks passed (2026-10-26, 12:06, client 7.1.03) |
-| **Download** | v1.1.0 not released yet. [Release v1.0.0](https://github.com/Minnito/zoom/releases/tag/v1.0.0) is built for API 6.2.1 and no longer loads on clients from 7.1.03 on |
+| **Download** | [Release v1.1.0](https://github.com/Minnito/zoom/releases/tag/v1.1.0) (API 7.1.03). Older releases up to v1.0.0 are built for API 6.2.1 and no longer load on clients from 7.1.03 on |
 | **Patch check** | `gradlew check`: 6 of 6 patches OK against Minecraft 26.3 (2026-10-26); in the game 6/6 applied |
 
 ---
