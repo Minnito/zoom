@@ -3,15 +3,15 @@
 | | |
 |---|---|
 | **Addon** | Zoom (ID `zoom`) |
-| **Version** | 1.0.0 |
+| **Version** | 1.1.0 |
 | **Developer** | Minnito / Claude |
-| **Platform** | Client addon for the MC Launcher, API 6.2.1, Minecraft 26.3 |
+| **Platform** | Client addon for the Swift Client, API 7.1.03, Minecraft 26.3 |
 | **Language / build** | Java 25 (`--release 25`), Gradle 9.4.1 (wrapper) |
-| **Status** | 2026-10-25 |
-| **Build** | `build/libs/zoom.jar`, 19,696 bytes, SHA-256 `3c35d414e2d655ca407e1f0e3b198d4176bece953f45e0610ceb8e3efcff6b8c` |
-| **Self-test** | `gradlew runTest`: 12 of 12 checks passed (2026-10-25, 21:21) |
-| **Download** | [Release v1.0.0](https://github.com/Minnito/zoom/releases/tag/v1.0.0) |
-| **Patch check** | not run yet: `gradlew check` needs the addon server (`localhost:8787`). All 6 patches were applied in the game without errors |
+| **Status** | 2026-10-26 |
+| **Build** | `build/libs/zoom.jar`, 19,696 bytes, SHA-256 `f80bb20f9a262e12b28216395f906b4dddb70768dd64750eec51cd130e4c54b6` |
+| **Self-test** | `gradlew runTest`: 12 of 12 checks passed (2026-10-26, 12:06, client 7.1.03) |
+| **Download** | v1.1.0 not released yet. [Release v1.0.0](https://github.com/Minnito/zoom/releases/tag/v1.0.0) is built for API 6.2.1 and no longer loads on clients from 7.1.03 on |
+| **Patch check** | `gradlew check`: 6 of 6 patches OK against Minecraft 26.3 (2026-10-26); in the game 6/6 applied |
 
 ---
 
@@ -96,10 +96,11 @@ All work happened on 2026-10-25.
 2. **API comparison.** Checked which features the client API covers (`View.fov`, `View.sensitivity`, `scroll`, `sound`, `ServerInfo.allowed`, `Net`) and which need patches; verified every patch target against the Minecraft 26.3 jar.
 3. **Build (version 1.0.0).** Gradle setup taken from MiniMap, own code for all 15 features.
 4. **Test.** `runTest` passed 12 of 12 checks; all 6 patches applied. Played with `runClient`: feels very close to Just Zoom.
+5. **API 7.1.03 (version 1.1.0, 2026-10-26).** Clients from 7.1.03 on no longer load addons built for older APIs. `module.json` now has `"api": "7.1.03"` and `"minecraft": ["26.3"]`, and `build.gradle` follows the 7.1.03 template. No code changes were needed: every client API call still exists. `gradlew check` passed 6 of 6 patches, `runTest` 12 of 12 checks.
 
 ## 5. Tests
 
-`gradlew runTest` starts a local vanilla server (port 25598, offline mode) and the game with the addon. The addon checks itself via `client.api.Testing`: it holds the zoom key virtually in third-person view and checks FOV, camera and mouse wheel. Result from 2026-10-25 (check names are output by the addon in German, translated in brackets):
+`gradlew runTest` starts a local vanilla server (port 25598, offline mode) and the game with the addon. The addon checks itself via `client.api.Testing`: it holds the zoom key virtually in third-person view and checks FOV, camera and mouse wheel. Result from 2026-10-26 (check names are output by the addon in German, translated in brackets):
 
 ```
 PASS Sichtfeld: 4× bei 70° → 19,85°                          [FOV: 4× at 70° → 19.85°]
@@ -132,14 +133,14 @@ The GitHub Action (`.github/workflows/build.yml`) only builds the jar on every p
 Requirement: JDK 25 or newer. The first build downloads Minecraft and its libraries once into `~/.gradle/caches/client-mc`.
 
 ```bash
-./gradlew build        # → build/libs/zoom.jar, also checks the patches (needs the addon server)
+./gradlew build        # → build/libs/zoom.jar, also checks the patches
 ./gradlew jar          # jar only, without the patch check
 ./gradlew runClient    # game with the addon, offline as "Dev", folder run/
 ./gradlew runTest      # test server + game, self-test
 ./gradlew install      # copy jar into the game; patches need a restart
 ```
 
-Without a reachable addon server, the build takes the API and client from the installed launcher (`%LOCALAPPDATA%/Programs/mc-launcher/resources/client.jar`, override with `-PclientJar=…`). Only the patch check (`checkPatches`) needs the server.
+API, patch check and client come as Maven artifacts from `https://api.gta5eclipse.de/maven` (other server: `-PclientServer=…`). The build no longer falls back to the installed launcher, whose client may be older than the API in `module.json`.
 
 ## 8. Key bindings
 
